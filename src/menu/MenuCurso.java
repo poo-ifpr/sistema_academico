@@ -23,15 +23,27 @@ public class MenuCurso implements Menu {
 		case 3:
 			alterarCurso();
 			break;
+		case 4:
+			removerCurso();
+			break;
 		default:
 			break;
 		}
 	}
 	
-	private void alterarCurso() {
-		Long id_curso = new Long(Console.lerNumeroObrigatorio("Digite o id do curso"));
+	private void removerCurso() {
 		CursoDAO cursoDAO = new CursoDAO();
-		Curso curso = cursoDAO.buscarPorId(id_curso);
+		Curso curso = buscarCursoPorId();
+		if(curso == null){
+			Console.mensagem("Nenhum curso foi encontrado");
+			return;
+		}
+		cursoDAO.remover(curso);
+	}
+
+	private void alterarCurso() {
+		CursoDAO cursoDAO = new CursoDAO();
+		Curso curso = buscarCursoPorId();
 		if(curso == null){
 			Console.mensagem("Nenhum curso foi encontrado");
 			return;
@@ -52,6 +64,13 @@ public class MenuCurso implements Menu {
 		for(Curso curso : cursos){
 			Console.mensagem(curso.toString());
 		}
+	}
+	
+	private Curso buscarCursoPorId(){
+		Long id_curso = new Long(Console.lerNumeroObrigatorio("Digite o id do curso"));
+		CursoDAO cursoDAO = new CursoDAO();
+		return cursoDAO.buscarPorId(id_curso);
+
 	}
 
 	private void inserirCurso() {
@@ -87,6 +106,7 @@ public class MenuCurso implements Menu {
 		Console.mensagem("1. Inserir");
 		Console.mensagem("2. Buscar curso por nome");
 		Console.mensagem("3. Alterar Curso (por id)");
+		Console.mensagem("4. Remover um Curso (por id)");
 		Console.mensagem("9. Voltar ao Menu Principal");
 		return Console.lerNumeroObrigatorio("");
 	}
