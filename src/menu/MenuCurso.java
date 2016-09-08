@@ -1,6 +1,8 @@
 package menu;
 
+import dao.CursoDAO;
 import model.Curso;
+import model.Modalidade;
 
 public class MenuCurso implements Menu {
 
@@ -15,8 +17,8 @@ public class MenuCurso implements Menu {
 	private void inserirCurso() {
 		System.out.println("Vou Inserir um Curso");
 		Curso novoCurso = getNovoCurso();
-//		CursoDAO cursoDAO = new CursoDAO();
-//		cursoDAO.inserir(curso);
+		CursoDAO cursoDAO = new CursoDAO();
+		cursoDAO.inserir(novoCurso);
 		
 	}
 
@@ -24,7 +26,7 @@ public class MenuCurso implements Menu {
 		System.out.println("Vou digitar informações do Curso");
 		Curso curso = new Curso();
 		curso.setNome("Informática");
-		curso.setModalidade("Integrado");
+		curso.setModalidade(Modalidade.INTEGRADO);
 		return curso;
 	}
 
