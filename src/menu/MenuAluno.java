@@ -4,10 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import dao.AlunoDAO;
-import dao.CursoDAO;
 import model.Aluno;
-import model.Curso;
-import model.Modalidade;
 import model.Parentesco;
 import model.Responsavel;
 import util.Console;
@@ -38,8 +35,14 @@ public class MenuAluno implements Menu {
 	}
 	
 	private void removerAluno() {
-		// TODO Auto-generated method stub
-		
+		AlunoDAO alunoDAO = new AlunoDAO();
+		Aluno aluno = buscarAlunoPorId();
+		if(aluno == null){
+			Console.mensagem("Nenhum aluno foi encontrado");
+			return;
+		}
+		alunoDAO.remover(aluno);
+		Console.mensagem("O aluno foi removido");
 	}
 
 	private void alterarAluno() {
