@@ -1,9 +1,13 @@
 package menu;
 
 import java.util.Date;
+import java.util.List;
 
 import dao.AlunoDAO;
+import dao.CursoDAO;
 import model.Aluno;
+import model.Curso;
+import model.Modalidade;
 import model.Parentesco;
 import model.Responsavel;
 import util.Console;
@@ -39,12 +43,50 @@ public class MenuAluno implements Menu {
 	}
 
 	private void alterarAluno() {
-		// TODO Auto-generated method stub
-		
+		AlunoDAO alunoDAO = new AlunoDAO();
+		Aluno aluno = buscarAlunoPorId();
+		if(aluno == null){
+			Console.mensagem("Nenhum aluno foi encontrado");
+			return;
+		}
+		Console.mensagem("Aluno escolhido: " + aluno);
+		String nome = Console.lerString("Digite o nome do Aluno");
+		String rg = Console.lerString("Digite o rg do Aluno");
+		String matricula = Console.lerString("Digite a "
+				+ "matrícula do aluno");
+		Date dataNascimento = Console.lerData("Digite a data de "
+				+ "nascimento do aluno");
+		if(! nome.isEmpty()){
+			aluno.setNome(nome);
+		}
+		if(! rg.isEmpty()){
+			aluno.setRg(rg);
+		}
+		if(! matricula.isEmpty()){
+			aluno.setMatricula(matricula);
+		}
+		if(dataNascimento != null){
+			aluno.setDataNascimento(dataNascimento);
+		}
+		alunoDAO.alterar(aluno);
+		Console.mensagem("Aluno atualizado: " + aluno);
+	}
+	
+	private Aluno buscarAlunoPorId(){
+		Long id_aluno = new Long(Console.lerNumeroObrigatorio("Digite o id do aluno"));
+		AlunoDAO alunoDAO = new AlunoDAO();
+		return alunoDAO.buscarPorId(id_aluno);
+
 	}
 
 	private void buscarAluno() {
-		// TODO Auto-generated method stub
+		String nomeAluno = Console.lerStringObrigatoria("Digite parte do nome do Aluno");
+		AlunoDAO alunoDAO = new AlunoDAO();
+		List<Aluno> alunos= alunoDAO.buscarPorNome(nomeAluno);
+		Console.mensagem("Foram encontrados (" + alunos.size() +") alunos");
+		for(Aluno aluno: alunos){
+			Console.mensagem(aluno.toString());
+		}
 		
 	}
 

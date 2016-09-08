@@ -87,6 +87,8 @@ public class Responsavel {
 		this.aluno = aluno;
 	}
 	
-	
+	public String toString(){
+		return nome + "(" + parentesco + ")";
+	}
 	
 }

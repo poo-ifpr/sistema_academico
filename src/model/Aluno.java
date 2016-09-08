@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import util.DateUtils;
+
 @Entity
 public class Aluno {
 
@@ -105,6 +107,12 @@ public class Aluno {
 		this.responsavel = responsavel;
 	}
 	
+	public String toString(){
+		return "[" + id + "] " + nome + " (Resp.:" + responsavel + ")"
+				+ " Matrícula: " + matricula
+				+ " RG: " + rg
+				+ " Data de Nascimento: " +  DateUtils.formataData(dataNascimento);
+	}
 	
 	
 }
