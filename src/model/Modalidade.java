@@ -2,16 +2,16 @@ package model;
 
 public enum Modalidade {
 
-	TECNICO,
-	INTEGRADO;
+	INTEGRADO,
+	SUBSEQUENTE;
 	
 	
 	public static Modalidade getModalidade(int i){
 		switch(i){
-		case 0:
-			return TECNICO;
 		case 1:
 			return INTEGRADO;
+		case 2:
+			return SUBSEQUENTE;
 		default:
 			throw new IllegalArgumentException("Valor Inválido");
 		}

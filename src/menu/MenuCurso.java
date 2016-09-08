@@ -3,6 +3,7 @@ package menu;
 import dao.CursoDAO;
 import model.Curso;
 import model.Modalidade;
+import util.Console;
 
 public class MenuCurso implements Menu {
 
@@ -23,11 +24,25 @@ public class MenuCurso implements Menu {
 	}
 
 	private Curso getNovoCurso() {
-		System.out.println("Vou digitar informações do Curso");
+		String nome = Console.lerStringObrigatoria("Digite o nome do Curso");
+		Modalidade modalidade = getModalidade();
 		Curso curso = new Curso();
-		curso.setNome("Informática");
-		curso.setModalidade(Modalidade.INTEGRADO);
+		curso.setNome(nome);
+		curso.setModalidade(modalidade);
 		return curso;
+	}
+
+	private Modalidade getModalidade() {
+		int numeroModalidade = Console.
+				lerNumeroObrigatorio("Digite a Modalidade (número).\n"
+						+ "1. Técnico Integrado\n"
+						+ "2. Técnico Subsequente");
+		try{
+			return Modalidade.getModalidade(numeroModalidade);
+		}
+		catch(IllegalArgumentException e){
+			return getModalidade();
+		}
 	}
 
 	public int escolheOpcao(){
