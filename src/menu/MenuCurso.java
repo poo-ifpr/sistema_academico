@@ -13,14 +13,15 @@ public class MenuCurso implements Menu {
 		if(opcao == 1){
 			inserirCurso();
 		}
+		else if(opcao == 9){
+			//Nada
+		}
 	}
 	
 	private void inserirCurso() {
-		System.out.println("Vou Inserir um Curso");
 		Curso novoCurso = getNovoCurso();
 		CursoDAO cursoDAO = new CursoDAO();
 		cursoDAO.inserir(novoCurso);
-		
 	}
 
 	private Curso getNovoCurso() {
@@ -46,8 +47,10 @@ public class MenuCurso implements Menu {
 	}
 
 	public int escolheOpcao(){
-		System.out.println("Inserir um curso");
-		return 1;
+		Console.mensagem("\n-----Menu Curso-----\n");
+		Console.mensagem("1. Inserir");
+		Console.mensagem("9. Voltar ao Menu Principal");
+		return Console.lerNumeroObrigatorio("");
 	}
 
 }
