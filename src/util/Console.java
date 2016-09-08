@@ -27,13 +27,17 @@ public class Console {
 		terminal.println(mensagem);
 	}
 	
-	public static String lerStringObrigatoria(String mensagem){
+	public static String lerString(String mensagem){
 		String string;
 		terminal.println(mensagem);
 		string = leitorStrings.nextLine();
+		return string;
+	}
+	
+	public static String lerStringObrigatoria(String mensagem){
+		String string = lerString(mensagem);
 		while (string.isEmpty()) {
-			terminal.println(mensagem);
-			string = leitorStrings.nextLine();
+			string = lerString(mensagem);
 		}
 		return string;
 	}
@@ -53,6 +57,19 @@ public class Console {
 			}
 		}
 		return numero;
+	}
+	
+	public static Date lerData(String mensagem) {
+		String dataString = lerString(mensagem);
+		if(dataString.isEmpty()){
+			return null;
+		}
+		try{
+			return dateFormatter.parse(dataString);
+		} catch(ParseException e){
+			mensagem("Data inválida. Entre novamente");
+			return lerData(mensagem);
+		}
 	}
 
 	public static Date lerDataObrigatoria(String mensagem) {
