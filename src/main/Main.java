@@ -1,6 +1,7 @@
 package main;
 
 import menu.Menu;
+import menu.MenuAluno;
 import menu.MenuCurso;
 import util.Console;
 
@@ -17,10 +18,12 @@ public class Main {
 	}
 
 	private static Menu getMenu(int opcao) {
-		if(opcao == 1){
+		switch(opcao){
+		case 1:
 			return new MenuCurso();
-		}
-		else if(opcao == 9){
+		case 2:
+			return new MenuAluno();
+		case 9:
 			Console.mensagem("Fim do Programa");
 			System.exit(0);
 		}
@@ -30,6 +33,7 @@ public class Main {
 	private static int menuPrincipal() {
 		Console.mensagem("\n-----Menu-----\n");
 		Console.mensagem("1. Curso");
+		Console.mensagem("2. Aluno");
 		Console.mensagem("9. Sair");
 		return Console.lerNumeroObrigatorio("");
 	}
