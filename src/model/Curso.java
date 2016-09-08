@@ -64,6 +64,9 @@ public class Curso {
 		this.modalidade = modalidade;
 	}
 	
+	public String toString(){
+		return "[" + id + "] " + nome + " (" +  modalidade + ")";
+	}
 	
 	
 	

@@ -1,5 +1,7 @@
 package menu;
 
+import java.util.List;
+
 import dao.CursoDAO;
 import model.Curso;
 import model.Modalidade;
@@ -10,14 +12,29 @@ public class MenuCurso implements Menu {
 	@Override
 	public void executar() {
 		int opcao = escolheOpcao();
-		if(opcao == 1){
+		switch(opcao){
+		
+		case 1:
 			inserirCurso();
-		}
-		else if(opcao == 9){
-			//Nada
+			break;
+		case 2:
+			buscarCurso();
+			break;
+		default:
+			break;
 		}
 	}
 	
+	private void buscarCurso() {
+		String nomeCurso = Console.lerStringObrigatoria("Digite parte do nome do Curso");
+		CursoDAO cursoDAO = new CursoDAO();
+		List<Curso> cursos = cursoDAO.buscarPorNome(nomeCurso);
+		Console.mensagem("Foram encontrados (" + cursos.size() +") cursos");
+		for(Curso curso : cursos){
+			Console.mensagem(curso.toString());
+		}
+	}
+
 	private void inserirCurso() {
 		Curso novoCurso = getNovoCurso();
 		CursoDAO cursoDAO = new CursoDAO();
@@ -49,6 +66,7 @@ public class MenuCurso implements Menu {
 	public int escolheOpcao(){
 		Console.mensagem("\n-----Menu Curso-----\n");
 		Console.mensagem("1. Inserir");
+		Console.mensagem("2. Buscar curso por nome");
 		Console.mensagem("9. Voltar ao Menu Principal");
 		return Console.lerNumeroObrigatorio("");
 	}
