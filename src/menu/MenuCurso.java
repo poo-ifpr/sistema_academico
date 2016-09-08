@@ -20,11 +20,30 @@ public class MenuCurso implements Menu {
 		case 2:
 			buscarCurso();
 			break;
+		case 3:
+			alterarCurso();
+			break;
 		default:
 			break;
 		}
 	}
 	
+	private void alterarCurso() {
+		Long id_curso = new Long(Console.lerNumeroObrigatorio("Digite o id do curso"));
+		CursoDAO cursoDAO = new CursoDAO();
+		Curso curso = cursoDAO.buscarPorId(id_curso);
+		if(curso == null){
+			Console.mensagem("Nenhum curso foi encontrado");
+			return;
+		}
+		Console.mensagem("Curso escolhido: " + curso);
+		String nome = Console.lerStringObrigatoria("Digite o nome do Curso");
+		Modalidade modalidade = getModalidade();
+		curso.setNome(nome);
+		curso.setModalidade(modalidade);
+		cursoDAO.alterar(curso);
+	}
+
 	private void buscarCurso() {
 		String nomeCurso = Console.lerStringObrigatoria("Digite parte do nome do Curso");
 		CursoDAO cursoDAO = new CursoDAO();
@@ -67,6 +86,7 @@ public class MenuCurso implements Menu {
 		Console.mensagem("\n-----Menu Curso-----\n");
 		Console.mensagem("1. Inserir");
 		Console.mensagem("2. Buscar curso por nome");
+		Console.mensagem("3. Alterar Curso (por id)");
 		Console.mensagem("9. Voltar ao Menu Principal");
 		return Console.lerNumeroObrigatorio("");
 	}
