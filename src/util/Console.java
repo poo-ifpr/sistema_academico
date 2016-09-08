@@ -17,6 +17,10 @@ public class Console {
 		terminal = System.out;
 	}
 	
+	public static void mensagem(String mensagem){
+		terminal.println(mensagem);
+	}
+	
 	public static String lerStringObrigatoria(String mensagem){
 		String string;
 		terminal.println(mensagem);
