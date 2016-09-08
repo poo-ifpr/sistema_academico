@@ -30,9 +30,8 @@ public class Curso {
 	
 	
 	
-	public Curso(long id, String nome, Modalidade modalidade) {
+	public Curso(String nome, Modalidade modalidade) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.modalidade = modalidade;
 	}
