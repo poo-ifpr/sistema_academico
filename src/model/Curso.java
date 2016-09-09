@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Curso {
@@ -22,7 +28,9 @@ public class Curso {
 	@Column(nullable=false, length=45)
 	private Modalidade modalidade;
 
-	
+	@JoinColumn(name="curso_id", referencedColumnName="id")
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Materia> materias = new ArrayList<Materia>();
 	
 	public Curso() {
 		super();
@@ -63,6 +71,18 @@ public class Curso {
 		this.modalidade = modalidade;
 	}
 	
+	public List<Materia> getMaterias() {
+		return materias;
+	}
+
+
+
+	public void setMaterias(List<Materia> materias) {
+		this.materias = materias;
+	}
+
+
+
 	public String toString(){
 		return "[" + id + "] " + nome + " (" +  modalidade + ")";
 	}
