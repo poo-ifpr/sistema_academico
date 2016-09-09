@@ -3,6 +3,7 @@ package main;
 import menu.Menu;
 import menu.MenuAluno;
 import menu.MenuCurso;
+import menu.MenuMateria;
 import util.Console;
 
 public class Main {
@@ -23,6 +24,8 @@ public class Main {
 			return new MenuCurso();
 		case 2:
 			return new MenuAluno();
+		case 3:
+			return new MenuMateria();
 		case 9:
 			Console.mensagem("Fim do Programa");
 			System.exit(0);
@@ -34,6 +37,7 @@ public class Main {
 		Console.mensagem("\n-----Menu-----\n");
 		Console.mensagem("1. Curso");
 		Console.mensagem("2. Aluno");
+		Console.mensagem("3. Matéria");
 		Console.mensagem("9. Sair");
 		return Console.lerNumeroObrigatorio("");
 	}
