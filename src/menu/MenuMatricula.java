@@ -29,8 +29,17 @@ public class MenuMatricula implements Menu {
 	}
 	
 	private void listarAlunosCurso() {
-		// TODO Auto-generated method stub
-		
+		AlunoDAO alunoDAO = new AlunoDAO();
+		Curso curso = new MenuCurso().getCurso();
+		String nomeAluno = Console.
+				lerStringObrigatoria("Digite parte do nome do Aluno");
+		List<Aluno> alunos = alunoDAO.buscarPorCursoPorNome(curso, nomeAluno);
+		Console.mensagem("Foram encontrados (" + alunos.size() +") alunos");
+		int i = 0;
+		for(Aluno aluno: alunos){
+			i++;
+			Console.mensagem(aluno.toString());
+		}
 	}
 
 	private void removerAlunoCurso() {
