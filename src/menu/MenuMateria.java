@@ -2,7 +2,6 @@ package menu;
 
 import java.util.List;
 
-import dao.CursoDAO;
 import dao.MateriaDAO;
 import model.Curso;
 import model.Materia;
@@ -34,14 +33,41 @@ public class MenuMateria implements Menu {
 	}
 	
 	private void removerMateria() {
-		// TODO Auto-generated method stub
-		
+		MateriaDAO materiaDAO = new MateriaDAO();
+		Materia materia = buscarMateriaPorId();
+		if(materia == null){
+			Console.mensagem("Nenhuma matéria foi encontrada");
+			return;
+		}
+		materiaDAO.remover(materia);
+		Console.mensagem("A matéria foi removida.");		
 	}
 
 	private void alterarMateria() {
-		// TODO Auto-generated method stub
+		MateriaDAO materiaDAO = new MateriaDAO();
+		Materia materia = buscarMateriaPorId();
+		if(materia == null){
+			Console.mensagem("Nenhuma matéria foi encontrada");
+			return;
+		}
+		Console.mensagem("Matéria escolhida: " + materia);
+		String nome = Console.lerString("Digite o nome da Matéria");
+		if(! nome.isEmpty()){
+			materia.setNome(nome);
+		}
+		materiaDAO.alterar(materia);
+		Console.mensagem("Matéria atualizada: " + materia);
 		
 	}
+	
+	private Materia buscarMateriaPorId(){
+		Long id_materia = new Long(Console.
+				lerNumeroObrigatorio("Digite o id da materia"));
+		MateriaDAO materiaDAO = new MateriaDAO();
+		return materiaDAO.buscarPorId(id_materia);
+
+	}
+
 
 	private void buscarMateria() {
 		String nomeMateria = Console.
@@ -61,28 +87,10 @@ public class MenuMateria implements Menu {
 	}
 
 	private Materia getNovaMateria() {
-		Curso curso = getCurso();
+		Curso curso = new MenuCurso().getCurso();
 		String nome = Console.lerStringObrigatoria("Digite o nome da Matéria");
 		Materia materia = new Materia(nome, curso);
 		return materia;
-	}
-	
-	private Curso getCurso(){
-		String nomeCurso = Console.lerStringObrigatoria("Digite parte do nome do Curso");
-		CursoDAO cursoDAO = new CursoDAO();
-		List<Curso> cursos = cursoDAO.buscarPorNome(nomeCurso);
-		if(cursos.isEmpty()){
-			Console.mensagem("Nenhum curso encontrado. Adicione um");
-			cursos.add(new MenuCurso().inserirCurso());
-		}
-		Console.mensagem("Foram encontrados (" + cursos.size() +") cursos");
-		int i = 0;
-		for(Curso curso : cursos){
-			i++;
-			Console.mensagem("(" + i + ") " +curso.toString());
-		}
-		i = Console.lerNumeroObrigatorio("Escolha o número do Curso");
-		return cursos.get(i - 1);
 	}
 
 	private int escolheOpcao() {
