@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -31,6 +33,15 @@ public class Curso {
 	@JoinColumn(name="curso_id", referencedColumnName="id")
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Materia> materias = new ArrayList<Materia>();
+	
+	@JoinTable(
+			name="matriculas",
+			joinColumns={@JoinColumn(name="curso_id")},
+			inverseJoinColumns={@JoinColumn(name="aluno_id")}
+			)
+	@ManyToMany
+	private List<Aluno> alunos = new ArrayList<Aluno>();
+	
 	
 	public Curso() {
 		super();
@@ -79,6 +90,18 @@ public class Curso {
 
 	public void setMaterias(List<Materia> materias) {
 		this.materias = materias;
+	}
+
+
+
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 
 

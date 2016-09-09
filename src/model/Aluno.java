@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,6 +38,8 @@ public class Aluno {
 	@OneToOne(cascade=CascadeType.ALL)
 	private Responsavel responsavel;
 	
+	@ManyToMany(mappedBy="alunos")
+	private List<Curso> cursos;
 	
 	public Aluno(){
 		
@@ -107,6 +111,18 @@ public class Aluno {
 		this.responsavel = responsavel;
 	}
 	
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+
+
 	public String toString(){
 		return "[" + id + "] " + nome + " (Resp.:" + responsavel + ")"
 				+ " Matrícula: " + matricula

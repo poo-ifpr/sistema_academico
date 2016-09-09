@@ -92,10 +92,12 @@ public class MenuAluno implements Menu {
 		}
 	}
 
-	private void inserirAluno() {
+	//Também utilizado em MenuMatricula
+	public Aluno inserirAluno() {
 		Aluno novoAluno = getNovoAluno();
 		AlunoDAO alunoDAO = new AlunoDAO();
 		alunoDAO.inserir(novoAluno);
+		return novoAluno;
 	}
 
 	private Aluno getNovoAluno() {
