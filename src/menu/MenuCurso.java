@@ -73,10 +73,12 @@ public class MenuCurso implements Menu {
 
 	}
 
-	private void inserirCurso() {
+	//Reutilizado em MenuMatéria
+	public Curso inserirCurso() {
 		Curso novoCurso = getNovoCurso();
 		CursoDAO cursoDAO = new CursoDAO();
 		cursoDAO.inserir(novoCurso);
+		return novoCurso;
 	}
 
 	private Curso getNovoCurso() {
