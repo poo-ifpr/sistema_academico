@@ -44,8 +44,14 @@ public class MenuMateria implements Menu {
 	}
 
 	private void buscarMateria() {
-		// TODO Auto-generated method stub
-		
+		String nomeMateria = Console.
+				lerStringObrigatoria("Digite parte do nome da Matéria");
+		MateriaDAO materiaDAO = new MateriaDAO();
+		List<Materia> materias= materiaDAO.buscarPorNome(nomeMateria);
+		Console.mensagem("Foram encontrados (" + materias.size() +") matérias");
+		for(Materia materia: materias){
+			Console.mensagem(materia.toString());
+		}
 	}
 
 	private void inserirMateria() {
@@ -73,7 +79,7 @@ public class MenuMateria implements Menu {
 		int i = 0;
 		for(Curso curso : cursos){
 			i++;
-			Console.mensagem("[" + i + "] " +curso.toString());
+			Console.mensagem("(" + i + ") " +curso.toString());
 		}
 		i = Console.lerNumeroObrigatorio("Escolha o número do Curso");
 		return cursos.get(i - 1);

@@ -90,7 +90,6 @@ public class MenuAluno implements Menu {
 		for(Aluno aluno: alunos){
 			Console.mensagem(aluno.toString());
 		}
-		
 	}
 
 	private void inserirAluno() {

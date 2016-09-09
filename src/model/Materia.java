@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Materia {
 	
@@ -58,5 +59,8 @@ public class Materia {
 		this.curso = curso;
 	}
 	
-	
+	public String toString(){
+		return "[" + id + "] " + nome + 
+			" (" + curso.getNome() + "[" + curso.getModalidade() + "])";
+	}
 }
