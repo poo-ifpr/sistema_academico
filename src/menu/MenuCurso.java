@@ -3,7 +3,10 @@ package menu;
 import java.util.List;
 
 import dao.CursoDAO;
+import dao.MateriaDAO;
+import model.Aluno;
 import model.Curso;
+import model.Materia;
 import model.Modalidade;
 import util.Console;
 
@@ -26,11 +29,28 @@ public class MenuCurso implements Menu {
 		case 4:
 			removerCurso();
 			break;
+		case 5:
+			listarMateriasPorNome();
+			break;
 		default:
 			break;
 		}
 	}
 	
+	private void listarMateriasPorNome() {
+		Curso curso = getCurso();
+		MateriaDAO materiaDAO = new MateriaDAO();
+		String nomeMateria = Console.
+				lerStringObrigatoria("Digite parte do nome da Matéria");
+		List<Materia> materias = materiaDAO.buscarPorCursoPorNome(curso, nomeMateria);
+		Console.mensagem("Foram encontrados (" + materias.size() +") matérias");
+		int i = 0;
+		for(Materia materia: materias){
+			i++;
+			Console.mensagem(materia.toString());
+		}
+	}
+
 	private void removerCurso() {
 		CursoDAO cursoDAO = new CursoDAO();
 		Curso curso = buscarCursoPorId();
@@ -128,6 +148,7 @@ public class MenuCurso implements Menu {
 		Console.mensagem("2. Buscar curso por nome");
 		Console.mensagem("3. Alterar Curso (por id)");
 		Console.mensagem("4. Remover um Curso (por id)");
+		Console.mensagem("5. Listar matérias do Curso (por parte do nome)");
 		Console.mensagem("9. Voltar ao Menu Principal");
 		return Console.lerNumeroObrigatorio("");
 	}
