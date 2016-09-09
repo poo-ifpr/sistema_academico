@@ -34,8 +34,23 @@ public class MenuMatricula implements Menu {
 	}
 
 	private void removerAlunoCurso() {
-		// TODO Auto-generated method stub
-		
+		CursoDAO cursoDAO = new CursoDAO();
+		Curso curso = new MenuCurso().getCurso();
+		List<Aluno> alunos = curso.getAlunos();
+		if(alunos.isEmpty()){
+			Console.mensagem("Nenhum aluno encontrado");
+			return;
+		}
+		Console.mensagem("Foram encontrados (" + alunos.size() +") alunos");
+		int i = 0;
+		for(Aluno aluno: alunos){
+			i++;
+			Console.mensagem("(" + i + ") " +aluno.toString());
+		}
+		i = Console.lerNumeroObrigatorio("Escolha o número do Aluno");
+		alunos.remove(i - 1);
+		curso.setAlunos(alunos);
+		cursoDAO.alterar(curso);
 	}
 
 	private void matricularAluno(){
