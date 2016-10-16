@@ -5,8 +5,11 @@ import java.util.List;
 import facade.FacadeCurso;
 import model.Curso;
 import util.Console;
+import view.AlterarCursoView;
+import view.BuscarCursoPorIdView;
 import view.BuscarCursoPorNomeView;
 import view.ExibirCursosView;
+import view.NenhumCursoEncontradoView;
 import view.NovoCursoView;
 
 public class MenuCurso implements Menu {
@@ -45,7 +48,14 @@ public class MenuCurso implements Menu {
 	}
 
 	private void alterarCurso() {
-		
+		Long idCurso = BuscarCursoPorIdView.criar();
+		Curso curso = FacadeCurso.buscarPorId(idCurso);
+		if(curso == null){
+			NenhumCursoEncontradoView.criar();
+			return;
+		}
+		Curso cursoAlterado = AlterarCursoView.criar(curso);
+		FacadeCurso.alterar(cursoAlterado);
 	}
 
 	private void buscarCurso() {

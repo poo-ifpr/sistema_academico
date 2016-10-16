@@ -29,29 +29,19 @@ public class FacadeCurso {
 			Console.mensagem(materia.toString());
 		}
 	}
+//TODO: FIx remover
+//	private void removerCurso() {
+//		CursoDAO cursoDAO = new CursoDAO();
+//		Curso curso = buscarCursoPorId();
+//		if(curso == null){
+//			Console.mensagem("Nenhum curso foi encontrado");
+//			return;
+//		}
+//		cursoDAO.remover(curso);
+//	}
 
-	private void removerCurso() {
+	public static void alterar(Curso curso) {
 		CursoDAO cursoDAO = new CursoDAO();
-		Curso curso = buscarCursoPorId();
-		if(curso == null){
-			Console.mensagem("Nenhum curso foi encontrado");
-			return;
-		}
-		cursoDAO.remover(curso);
-	}
-
-	private void alterarCurso() {
-		CursoDAO cursoDAO = new CursoDAO();
-		Curso curso = buscarCursoPorId();
-		if(curso == null){
-			Console.mensagem("Nenhum curso foi encontrado");
-			return;
-		}
-		Console.mensagem("Curso escolhido: " + curso);
-		String nome = Console.lerStringObrigatoria("Digite o nome do Curso");
-		Modalidade modalidade = NovaModalidadeView.criar();
-		curso.setNome(nome);
-		curso.setModalidade(modalidade);
 		cursoDAO.alterar(curso);
 	}
 
@@ -61,10 +51,9 @@ public class FacadeCurso {
 		return cursos;
 	}
 	
-	private Curso buscarCursoPorId(){
-		Long id_curso = new Long(Console.lerNumeroObrigatorio("Digite o id do curso"));
+	public static Curso buscarPorId(Long idCurso){
 		CursoDAO cursoDAO = new CursoDAO();
-		return cursoDAO.buscarPorId(id_curso);
+		return cursoDAO.buscarPorId(idCurso);
 
 	}
 
