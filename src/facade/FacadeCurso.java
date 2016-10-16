@@ -71,21 +71,15 @@ public class FacadeCurso {
 	}
 
 	//Reutilizado em MenuMatéria
-	public Curso inserirCurso() {
-		Curso novoCurso = getNovoCurso();
+	public static Curso inserir() {
+		//TODO: Fix GetNovoCurso
+		//Curso novoCurso = getNovoCurso();
 		CursoDAO cursoDAO = new CursoDAO();
 		cursoDAO.inserir(novoCurso);
 		return novoCurso;
 	}
 
-	private Curso getNovoCurso() {
-		String nome = Console.lerStringObrigatoria("Digite o nome do Curso");
-		Modalidade modalidade = getModalidade();
-		Curso curso = new Curso();
-		curso.setNome(nome);
-		curso.setModalidade(modalidade);
-		return curso;
-	}
+
 	
 	//Utilizado em MenuMateria e MenuMatricula
 	public Curso getCurso(){
@@ -106,18 +100,7 @@ public class FacadeCurso {
 		return cursos.get(i - 1);
 	}
 
-	private Modalidade getModalidade() {
-		int numeroModalidade = Console.
-				lerNumeroObrigatorio("Digite a Modalidade (número).\n"
-						+ "1. Técnico Integrado\n"
-						+ "2. Técnico Subsequente");
-		try{
-			return Modalidade.getModalidade(numeroModalidade);
-		}
-		catch(IllegalArgumentException e){
-			return getModalidade();
-		}
-	}
+	
 
 	
 
