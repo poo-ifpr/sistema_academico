@@ -1,8 +1,12 @@
 package menu;
 
+import java.util.List;
+
 import facade.FacadeCurso;
 import model.Curso;
 import util.Console;
+import view.BuscarCursoPorNomeView;
+import view.ExibirCursosView;
 import view.NovoCursoView;
 
 public class MenuCurso implements Menu {
@@ -45,7 +49,9 @@ public class MenuCurso implements Menu {
 	}
 
 	private void buscarCurso() {
-		
+		String nomeCurso = BuscarCursoPorNomeView.criar();
+		List<Curso> cursos = FacadeCurso.buscar(nomeCurso);
+		ExibirCursosView.criar(cursos);
 	}
 	
 	

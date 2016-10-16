@@ -55,14 +55,10 @@ public class FacadeCurso {
 		cursoDAO.alterar(curso);
 	}
 
-	private void buscarCurso() {
-		String nomeCurso = Console.lerStringObrigatoria("Digite parte do nome do Curso");
+	public static List<Curso> buscar(String nomeCurso) {
 		CursoDAO cursoDAO = new CursoDAO();
 		List<Curso> cursos = cursoDAO.buscarPorNome(nomeCurso);
-		Console.mensagem("Foram encontrados (" + cursos.size() +") cursos");
-		for(Curso curso : cursos){
-			Console.mensagem(curso.toString());
-		}
+		return cursos;
 	}
 	
 	private Curso buscarCursoPorId(){
