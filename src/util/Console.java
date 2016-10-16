@@ -52,6 +52,7 @@ public class Console {
 				ok = true;
 			}
 			catch(Exception e){
+				leitorNumeros.nextLine();
 				terminal.println("Erro na leitura do número. Tente novamente");
 				ok = false;
 			}
