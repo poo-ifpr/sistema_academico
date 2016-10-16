@@ -3,6 +3,7 @@ package menu;
 import java.util.List;
 
 import dao.MateriaDAO;
+import facade.FacadeCurso;
 import model.Curso;
 import model.Materia;
 import util.Console;
@@ -87,7 +88,7 @@ public class MenuMateria implements Menu {
 	}
 
 	private Materia getNovaMateria() {
-		Curso curso = new MenuCurso().getCurso();
+		Curso curso = FacadeCurso.getCurso();
 		String nome = Console.lerStringObrigatoria("Digite o nome da Matéria");
 		Materia materia = new Materia(nome, curso);
 		return materia;

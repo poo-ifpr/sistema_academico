@@ -82,7 +82,7 @@ public class FacadeCurso {
 
 	
 	//Utilizado em MenuMateria e MenuMatricula
-	public Curso getCurso(){
+	public static Curso getCurso(){
 		String nomeCurso = Console.lerStringObrigatoria("Digite parte do nome do Curso");
 		CursoDAO cursoDAO = new CursoDAO();
 		List<Curso> cursos = cursoDAO.buscarPorNome(nomeCurso);
