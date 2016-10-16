@@ -44,7 +44,13 @@ public class MenuCurso implements Menu {
 	}
 
 	private void removerCurso() {
-		
+		Long idCurso = BuscarCursoPorIdView.criar();
+		Curso curso = FacadeCurso.buscarPorId(idCurso);
+		if(curso == null){
+			NenhumCursoEncontradoView.criar();
+			return;
+		}
+		FacadeCurso.remover(curso);
 	}
 
 	private void alterarCurso() {

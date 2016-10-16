@@ -29,16 +29,11 @@ public class FacadeCurso {
 			Console.mensagem(materia.toString());
 		}
 	}
-//TODO: FIx remover
-//	private void removerCurso() {
-//		CursoDAO cursoDAO = new CursoDAO();
-//		Curso curso = buscarCursoPorId();
-//		if(curso == null){
-//			Console.mensagem("Nenhum curso foi encontrado");
-//			return;
-//		}
-//		cursoDAO.remover(curso);
-//	}
+
+	public static void remover(Curso curso) {
+		CursoDAO cursoDAO = new CursoDAO();
+		cursoDAO.remover(curso);
+	}
 
 	public static void alterar(Curso curso) {
 		CursoDAO cursoDAO = new CursoDAO();
