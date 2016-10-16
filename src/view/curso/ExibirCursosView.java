@@ -1,4 +1,4 @@
-package view;
+package view.curso;
 
 import java.util.List;
 
@@ -9,8 +9,10 @@ public class ExibirCursosView {
 
 	public static void criar(List<Curso> cursos){
 		Console.mensagem("Foram encontrados (" + cursos.size() +") cursos");
+		int i = 0;
 		for(Curso curso : cursos){
-			Console.mensagem(curso.toString());
+			i++;
+			Console.mensagem("(" + i + ") " +curso.toString());
 		}
 	}
 }

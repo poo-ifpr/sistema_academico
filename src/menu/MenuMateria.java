@@ -88,7 +88,7 @@ public class MenuMateria implements Menu {
 	}
 
 	private Materia getNovaMateria() {
-		Curso curso = FacadeCurso.getCurso();
+		Curso curso = MenuCurso.getCurso();
 		String nome = Console.lerStringObrigatoria("Digite o nome da Matéria");
 		Materia materia = new Materia(nome, curso);
 		return materia;

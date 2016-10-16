@@ -1,4 +1,4 @@
-package view;
+package view.modalidade;
 
 import model.Modalidade;
 import util.Console;

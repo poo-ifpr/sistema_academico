@@ -1,4 +1,4 @@
-package view;
+package view.curso;
 
 import util.Console;
 

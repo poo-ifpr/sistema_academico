@@ -1,8 +1,8 @@
-package view;
+package view.curso;
 
 import util.Console;
 
-public class BuscarCursoPorNomeView {
+public class LerNomeCursoView {
 
 	
 	public static String criar(){

@@ -3,14 +3,19 @@ package menu;
 import java.util.List;
 
 import facade.FacadeCurso;
+import facade.FacadeMateria;
 import model.Curso;
+import model.Materia;
 import util.Console;
-import view.AlterarCursoView;
-import view.BuscarCursoPorIdView;
-import view.BuscarCursoPorNomeView;
-import view.ExibirCursosView;
-import view.NenhumCursoEncontradoView;
-import view.NovoCursoView;
+import view.curso.AlterarCursoView;
+import view.curso.BuscarCursoPorIdView;
+import view.curso.EscolhaNumeroCursoView;
+import view.curso.ExibirCursosView;
+import view.curso.LerNomeCursoView;
+import view.curso.NenhumCursoEncontradoView;
+import view.curso.NovoCursoView;
+import view.materia.BuscarParteNomeMateriaView;
+import view.materia.ExibirMateriasView;
 
 public class MenuCurso implements Menu {
 
@@ -38,8 +43,11 @@ public class MenuCurso implements Menu {
 			break;
 		}
 	}
-	
 	private void listarMateriasPorNome() {
+		Curso curso = getCurso();
+		String nomeMateria = BuscarParteNomeMateriaView.criar();
+		List<Materia> materias = FacadeMateria.listarMateriasCursoPorNome(curso, nomeMateria);
+		ExibirMateriasView.criar(materias);
 		
 	}
 
@@ -65,7 +73,7 @@ public class MenuCurso implements Menu {
 	}
 
 	private void buscarCurso() {
-		String nomeCurso = BuscarCursoPorNomeView.criar();
+		String nomeCurso = LerNomeCursoView.criar();
 		List<Curso> cursos = FacadeCurso.buscar(nomeCurso);
 		ExibirCursosView.criar(cursos);
 	}
@@ -90,4 +98,18 @@ public class MenuCurso implements Menu {
 		return Console.lerNumeroObrigatorio("");
 	}
 
+	//Utilizado em MenuMateria e MenuMatricula
+	public static Curso getCurso(){
+		String nomeCurso = LerNomeCursoView.criar();
+		List<Curso> cursos = FacadeCurso.buscar(nomeCurso);
+		if(cursos.isEmpty()){
+			NenhumCursoEncontradoView.criar();
+			Curso novoCurso = NovoCursoView.criar();
+			cursos.add(FacadeCurso.inserir(novoCurso));
+		}
+		ExibirCursosView.criar(cursos);
+		int i = EscolhaNumeroCursoView.criar();
+		return cursos.get(i);
+	}
+	
 }

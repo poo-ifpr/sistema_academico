@@ -31,7 +31,7 @@ public class MenuMatricula implements Menu {
 	
 	private void listarAlunosCurso() {
 		AlunoDAO alunoDAO = new AlunoDAO();
-		Curso curso = FacadeCurso.getCurso();
+		Curso curso = MenuCurso.getCurso();
 		String nomeAluno = Console.
 				lerStringObrigatoria("Digite parte do nome do Aluno");
 		List<Aluno> alunos = alunoDAO.buscarPorCursoPorNome(curso, nomeAluno);
@@ -45,7 +45,7 @@ public class MenuMatricula implements Menu {
 
 	private void removerAlunoCurso() {
 		CursoDAO cursoDAO = new CursoDAO();
-		Curso curso = FacadeCurso.getCurso();
+		Curso curso = MenuCurso.getCurso();
 		List<Aluno> alunos = curso.getAlunos();
 		if(alunos.isEmpty()){
 			Console.mensagem("Nenhum aluno encontrado");
@@ -64,7 +64,7 @@ public class MenuMatricula implements Menu {
 	}
 
 	private void matricularAluno(){
-		Curso curso = FacadeCurso.getCurso();
+		Curso curso = MenuCurso.getCurso();
 		Aluno aluno = getAluno();
 		curso.getAlunos().add(aluno);
 		CursoDAO cursoDAO = new CursoDAO();
