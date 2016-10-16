@@ -1,7 +1,9 @@
 package menu;
 
+import facade.FacadeCurso;
 import model.Curso;
 import util.Console;
+import view.NovoCursoView;
 
 public class MenuCurso implements Menu {
 
@@ -50,7 +52,8 @@ public class MenuCurso implements Menu {
 
 	//Reutilizado em MenuMatéria
 	public Curso inserirCurso() {
-		//TODO: FIX return
+		Curso novoCurso = NovoCursoView.criar();
+		return FacadeCurso.inserir(novoCurso);
 	}
 
 

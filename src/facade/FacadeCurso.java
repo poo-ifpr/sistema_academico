@@ -73,8 +73,7 @@ public class FacadeCurso {
 	}
 
 	//Reutilizado em MenuMatéria
-	public static Curso inserir() {
-		Curso novoCurso = NovoCursoView.criar();
+	public static Curso inserir(Curso novoCurso) {
 		CursoDAO cursoDAO = new CursoDAO();
 		cursoDAO.inserir(novoCurso);
 		return novoCurso;
@@ -89,7 +88,8 @@ public class FacadeCurso {
 		List<Curso> cursos = cursoDAO.buscarPorNome(nomeCurso);
 		if(cursos.isEmpty()){
 			Console.mensagem("Nenhum curso encontrado. Adicione um");
-			cursos.add(FacadeCurso.inserir());
+			Curso novoCurso = NovoCursoView.criar();
+			cursos.add(FacadeCurso.inserir(novoCurso));
 		}
 		Console.mensagem("Foram encontrados (" + cursos.size() +") cursos");
 		int i = 0;
