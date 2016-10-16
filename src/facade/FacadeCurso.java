@@ -9,6 +9,8 @@ import model.Curso;
 import model.Materia;
 import model.Modalidade;
 import util.Console;
+import view.NovaModalidadeView;
+import view.NovoCursoView;
 
 public class FacadeCurso {
 
@@ -47,7 +49,7 @@ public class FacadeCurso {
 		}
 		Console.mensagem("Curso escolhido: " + curso);
 		String nome = Console.lerStringObrigatoria("Digite o nome do Curso");
-		Modalidade modalidade = getModalidade();
+		Modalidade modalidade = NovaModalidadeView.criar();
 		curso.setNome(nome);
 		curso.setModalidade(modalidade);
 		cursoDAO.alterar(curso);
@@ -72,8 +74,7 @@ public class FacadeCurso {
 
 	//Reutilizado em MenuMatéria
 	public static Curso inserir() {
-		//TODO: Fix GetNovoCurso
-		//Curso novoCurso = getNovoCurso();
+		Curso novoCurso = NovoCursoView.criar();
 		CursoDAO cursoDAO = new CursoDAO();
 		cursoDAO.inserir(novoCurso);
 		return novoCurso;
@@ -88,7 +89,7 @@ public class FacadeCurso {
 		List<Curso> cursos = cursoDAO.buscarPorNome(nomeCurso);
 		if(cursos.isEmpty()){
 			Console.mensagem("Nenhum curso encontrado. Adicione um");
-			cursos.add(new FacadeCurso().inserirCurso());
+			cursos.add(FacadeCurso.inserir());
 		}
 		Console.mensagem("Foram encontrados (" + cursos.size() +") cursos");
 		int i = 0;
