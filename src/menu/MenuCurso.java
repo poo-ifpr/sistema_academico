@@ -6,6 +6,8 @@ import facade.FacadeCurso;
 import facade.FacadeMateria;
 import model.Curso;
 import model.Materia;
+import observers.curso.LogCursoObserver;
+import observers.curso.NovoCursoObserver;
 import util.Console;
 import view.curso.AlterarCursoView;
 import view.curso.BuscarCursoPorIdView;
@@ -80,10 +82,12 @@ public class MenuCurso implements Menu {
 	
 	
 
-	//Reutilizado em MenuMatéria
-	public Curso inserirCurso() {
-		Curso novoCurso = NovoCursoView.criar();
-		return FacadeCurso.inserir(novoCurso);
+	public void inserirCurso() {
+		NovoCursoView novoCursoView = new NovoCursoView();
+		novoCursoView.adicionarObserver(NovoCursoObserver.criar());
+		novoCursoView.adicionarObserver(LogCursoObserver.criar());
+		novoCursoView.executar();
+		
 	}
 
 
@@ -104,7 +108,12 @@ public class MenuCurso implements Menu {
 		List<Curso> cursos = FacadeCurso.buscar(nomeCurso);
 		if(cursos.isEmpty()){
 			NenhumCursoEncontradoView.criar();
-			Curso novoCurso = NovoCursoView.criar();
+			NovoCursoView novoCursoView = new NovoCursoView();
+			NovoCursoObserver novoCursoObserver = NovoCursoObserver.criar();
+			novoCursoView.adicionarObserver(novoCursoObserver);
+			novoCursoView.adicionarObserver(LogCursoObserver.criar());
+			novoCursoView.executar();
+			Curso novoCurso = novoCursoObserver.getCurso();
 			cursos.add(FacadeCurso.inserir(novoCurso));
 		}
 		ExibirCursosView.criar(cursos);

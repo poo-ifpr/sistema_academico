@@ -29,7 +29,7 @@ public abstract class SubjectView<E> implements Subject<E> {
 		}
 	}
 
-	abstract E getSubject();
+	public abstract E getSubject();
 	
 	
 }
